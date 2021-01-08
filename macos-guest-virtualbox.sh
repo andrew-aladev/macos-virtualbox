@@ -15,14 +15,14 @@
 
 function set_variables() {
 # Customize the installation by setting these variables:
-vm_name="macOS"                  # name of the VirtualBox virtual machine
+vm_name="Mac OS"                 # name of the VirtualBox virtual machine
 macOS_release_name="Catalina"    # install "HighSierra" "Mojave" or "Catalina"
-storage_size=80000               # VM disk image size in MB, minimum 22000
+storage_size=22000               # VM disk image size in MB, minimum 22000
 storage_format="vdi"             # VM disk image file format, "vdi" or "vmdk"
 cpu_count=2                      # VM CPU cores, minimum 2
-memory_size=4096                 # VM RAM in MB, minimum 2048
+memory_size=2048                 # VM RAM in MB, minimum 2048
 gpu_vram=128                     # VM video RAM in MB, minimum 34, maximum 128
-resolution="1280x800"            # VM display resolution
+resolution="1920x1080"           # VM display resolution
 
 # The following commented commands, when executed on a genuine Mac,
 # may provide the values for NVRAM and EFI parameters required by iCloud,
@@ -639,8 +639,9 @@ echo "/ESP/startup.nsh=\"${vm_name}_startup.nsh\"" >> "${macOS_release_name}_ins
 
 function configure_vm() {
 print_dimly "stage: configure_vm"
-VBoxManage modifyvm "${vm_name}" --cpus "${cpu_count}" --memory "${memory_size}" \
- --vram "${gpu_vram}" --pae on --boot1 none --boot2 none --boot3 none \
+VBoxManage modifyvm "${vm_name}" --cpus "${cpu_count}" \
+ --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff --cpu-profile "Intel Core i7-6700K" \
+ --memory "${memory_size}" --vram "${gpu_vram}" --pae on --boot1 none --boot2 none --boot3 none \
  --boot4 none --firmware efi --rtcuseutc on --chipset ich9 ${extension_pack_usb3_support} \
  --mouse usbtablet --keyboard usb --audiocontroller hda --audiocodec stac9221
 
