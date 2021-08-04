@@ -22,7 +22,7 @@ storage_format="vdi"             # VM disk image file format, "vdi" or "vmdk"
 cpu_count=2                      # VM CPU cores, minimum 2
 memory_size=2048                 # VM RAM in MB, minimum 2048
 gpu_vram=128                     # VM video RAM in MB, minimum 34, maximum 128
-resolution="1920x1080"           # VM display resolution
+resolution="1440x900"            # VM display resolution
 
 # The following commented commands, when executed on a genuine Mac,
 # may provide the values for NVRAM and EFI parameters required by iCloud,
